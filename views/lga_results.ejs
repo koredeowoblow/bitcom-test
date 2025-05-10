@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LGA Results</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-light">
+    <div class="container mt-5">
+      <h1 class="mb-4 text-center">LGA Results</h1>
+
+      <form method="get" class="mb-4">
+        <div class="row">
+          <!-- State ID Input -->
+          <div class="col-md-6 mb-3">
+            <label for="stateIdInput" class="form-label">State ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="stateIdInput"
+              name="state_id"
+              value="<%= typeof state_id !== 'undefined' ? state_id : '' %>"
+              placeholder="Enter State ID"
+              required
+            />
+          </div>
+
+          <!-- LGA Select -->
+          <div class="col-md-6 mb-3">
+            <label for="lgaSelect" class="form-label"
+              >Local Government Area</label
+            >
+            <select name="lga_id" id="lgaSelect" class="form-select" required>
+              <option value="">-- Select LGA --</option>
+              <% lgas.forEach(lga => { %>
+              <option value="<%= lga.lga_id %>"><%= lga.lga_name %></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary w-100">
+              View Results
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <% if (results.length > 0) { %>
+      <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>Party</th>
+            <th>Total Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% results.forEach(result => { %>
+          <tr>
+            <td><%= result.party_abbreviation %></td>
+            <td><%= result.dataValues.total_score %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } else { %>
+      <div class="alert alert-info">Select an LGA to view results.</div>
+      <% } %>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
