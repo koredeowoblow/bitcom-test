@@ -1,4 +1,4 @@
-import PollingUnit from "../models/pollingUnit.js";
+import PollingUnit from "../models/PollingUnit.js";
 import AnnouncedPuResult from "../models/AnnouncedPuResult.js";
 import LGA from "../models/lga.js";
 import State from "../models/state.js";
